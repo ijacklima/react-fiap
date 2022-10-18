@@ -1,11 +1,86 @@
 import React from 'react'
+import styles from  './Header.module.css';
+import { css } from '@emotion/css';
+import styled from '@emotion/styled';
+import Link from 'next/link';
+import Input from "../Form/Input";
+import Button from '../Form/Button';
+//styled-components;
+const HeaderPage = styled.header`
+width: 100%;
+height: 100px;
+background: rgb(247, 243, 232);
+display: flex;
+align-items: center;
+justify-content: space-between;
+& > div:first-child,
+& > div:last-child {
+  margin: 0 5%;
+}
+`;
 
-export default function Header() {
+const NavMenu = styled.nav`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  & a:hover {
+    font-weight: bold;
+  }
+  & li {
+    margin-top: 4px;
+    border-bottom: 4px solid transparent;
+    padding-bottom: 20px;
+  }
+  & li:hover {
+    border-bottom: double 4px orange;
+  }
+`;
+
+
+
+
+//Input
+
+//Button
+
+type HeaderProps = {
+  pesquisar ?: string;
+  menu?: Array<string>;
+}
+export default function Header(props:HeaderProps) {
   return (
-    <header>
+    //<header className={styles['menu-site']}>
+    <HeaderPage>
         <div>Logotipo</div>
-        <nav>Navegação Menu</nav>
-        <div>Caixa de Busca</div>
-    </header>
+        <NavMenu>
+          <ul className={ css`
+          margin:0;
+          padding:0;
+          display: inline-flex;
+          & > li {
+            list-style: none;
+            min-width: 100px;
+            text-align: center;
+            padding: 10px;
+          }
+          `}>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/login">Login</Link></li>
+            <li><Link href="/sobre">Sobre</Link></li>
+            <li><Link href="#">Galeria</Link></li>
+            <li><Link href="#">Serviços</Link></li>
+            <li><Link href="#">Blog</Link></li>
+            <li><Link href="#">Contato</Link></li>
+          </ul>
+        </NavMenu>
+        <div>
+
+          <Input type="text" placeholder="Digite sua busca" />
+          <Button>{props.pesquisar?props.pesquisar:"Search"}</Button>
+
+
+          </div>
+    </HeaderPage>
   )
 }
